@@ -38,10 +38,10 @@ export type JElement = {
 type ElementProps = {
   tagName: keyof ElementsTagName;
   elementId: string;
-  children?: SuffixedTagName;
+  children?: SuffixedTagNameObject;
 };
 
-const getElementProps = (element: SuffixedTagName): ElementProps[] => {
+const getElementProps = (element: SuffixedTagNameObject): ElementProps[] => {
   return Object.keys(element).map(key => {
     const elementNameArray = key.split(/(?=[A-Z])/);
     let tagName =
@@ -50,13 +50,13 @@ const getElementProps = (element: SuffixedTagName): ElementProps[] => {
       tagName = key;
     }
     const elementId = key.substring(0, key.length - tagName.length);
-    const children = element[key as keyof SuffixedTagName];
+    const children = element[key as keyof SuffixedTagNameObject];
 
     return { tagName, elementId, children } as ElementProps;
   });
 };
 
-const getElementData = (children: SuffixedTagName) => {
+const getElementData = (children: SuffixedTagNameObject) => {
   const subElements: ElementProps[] = [];
   const elementProps: ElementProps[] = [];
   const ElementChildrenAndProperties = getElementProps(children);
@@ -117,7 +117,7 @@ const renderElement = ({ tagName, elementId, children }: ElementProps) => {
 };
 
 export const render = (
-  element: SuffixedTagName,
+  element: SuffixedTagNameObject,
   container: HTMLElement | null
 ) => {
   const containerElement = container ?? document.body;

@@ -1,7 +1,6 @@
 node_modules
-dist
 *.js
-
-.husky
+.hasky
+dist
 .parcel-cache
 .vscode

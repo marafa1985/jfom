@@ -1,46 +1,55 @@
-import { SuffixedTagNameObject } from 'lib/types';
+import { render, SuffixedTagNameObject } from '../../../../lib/types';
 import { UpIcon } from '../../../shared/icons';
 import { Badge } from '../Badge/Badge';
 import { StoreList, stores } from '../StoreList/StoreList';
 import './Accordion.scss';
 
-const onToggle = (event: MouseEvent) => {
-  const self: any = event.currentTarget;
-  if (self) {
-    if (self.classList.contains('down')) {
-      self.classList.add('up');
-      self.classList.remove('down');
-      return;
-    }
-    self.classList.add('down');
-    self.classList.remove('up');
-  }
+const accordionState = {
+  open: false
 };
 
-const AccordionSummary = (
-  innerHTML: string,
-  open?: boolean
-): SuffixedTagNameObject => ({
-  accordionSummary: {
-    onclick: onToggle,
-    className: 'Accordion__summary',
-    headerDiv: {
-      className: 'Summary__Header',
-      titleH2: {
-        className: 'Summary__Title',
-        innerHTML
+const rerender = (currentTarget: HTMLElement) => {
+  const elementParent = currentTarget.parentElement;
+
+  if (currentTarget.id) {
+    const currentNode = document.getElementById(currentTarget.id);
+    currentNode && elementParent && elementParent.removeChild(currentNode);
+  }
+
+  render(
+    AccordionSummary('Abholung im Store'),
+    elementParent?.id ? document.getElementById(elementParent.id) : null
+  );
+};
+
+const AccordionSummary = (innerHTML: string): SuffixedTagNameObject => {
+  function onToggle(ev: MouseEvent) {
+    accordionState.open = !accordionState.open;
+    ev.currentTarget && rerender(ev.currentTarget as HTMLElement);
+  }
+
+  return {
+    accordionSummarySummary: {
+      onclick: onToggle,
+      className: 'Accordion__summary',
+      headerDiv: {
+        className: 'Summary__Header',
+        titleH2: {
+          className: 'Summary__Title',
+          innerHTML
+        },
+        ...Badge(30, true)
       },
-      ...Badge(30, true)
-    },
-    arrowSpan: {
-      className: 'Accordion__Arrow' + (open ? ' down' : ' up'),
-      upIconImg: {
-        src: UpIcon,
-        alt: 'upIcon'
+      arrowSpan: {
+        className: 'Accordion__Arrow' + (accordionState.open ? ' down' : ' up'),
+        upIconImg: {
+          src: UpIcon,
+          alt: 'upIcon'
+        }
       }
     }
-  }
-});
+  };
+};
 
 const AccordionContent = (): SuffixedTagNameObject => ({
   inputSearch: {
@@ -53,8 +62,8 @@ const AccordionContent = (): SuffixedTagNameObject => ({
 
 export const Accordion: SuffixedTagNameObject = {
   accordionDetails: {
-    open: true,
-    ...AccordionSummary('Abholung im Store', true),
+    open: accordionState.open,
+    ...AccordionSummary('Abholung im Store'),
     ...AccordionContent()
   }
 };

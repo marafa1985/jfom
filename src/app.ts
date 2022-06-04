@@ -1,27 +1,56 @@
-import { renderForm } from './components/atoms/Input';
-import { JFormDOM } from './JFormDOM';
-import { jFormMock } from './mock/form';
+import { Accordion } from './components/atoms/Accordion/Accordion';
+import { JElement, render } from '../lib/types';
+import './styles/style.scss';
 
-const elem = document.createElement<'p'>(`p`);
-elem.id = `myBrandnewDiv1`;
-elem.appendChild(document.createTextNode(`My brand new div #1`));
-elem.innerHTML += ` =&gt; created using 
-  <code>document.createElement</code>`;
+const func = (ev: MouseEvent) => {
+  console.log(ev);
+  ev.preventDefault();
+  alert('hello');
+};
 
-// const onClick = (ev: MouseEvent) => {
-//   console.log('Hi New');
-//   console.log(ev);
-// };
+const page: JElement = {
+  employeeEditDiv: {
+    filterDiv: { ...Accordion },
+    formTitleH1: {
+      innerHTML: 'Employee Information',
+      onclick: func
+    },
+    formTitleH2: {
+      innerHTML: 'Employee Information',
+      onclick: func
+    },
+    employeeForm: {
+      personalInfoDiv: {
+        className: 'personalInfo',
+        firstNameText: {
+          ariaRequired: 'true'
+        },
+        lastNameText: {
+          placeholder: 'Last Name',
+          disabled: true
+        }
+      },
+      contactInfoDiv: {
+        className: 'contactInfo',
+        emailEmail: {
+          placeholder: 'Employee Email',
+          'data-testid': 'employeeEmail'
+        },
+        contactTel: {}
+      },
+      buttonDiv: {
+        className: 'buttonControls',
+        cancelReset: {
+          onclick: function (ev: MouseEvent) {
+            console.log(ev);
+            ev.preventDefault();
+            alert('hello');
+          }
+        },
+        submitSubmit: {}
+      }
+    }
+  }
+};
 
-// const inputText: Input = {
-//   type: 'radio',
-//   validation: ['isEmail'],
-//   checked: true,
-//   value: 'huey',
-//   // placeholder: '1 + 2 = ?',
-//   onclick: function (ev: MouseEvent) {
-//     onClick(ev);
-//   }
-// };
-
-JFormDOM.render(renderForm(jFormMock), document.getElementById('root'));
+render(page, document.getElementById('root'));

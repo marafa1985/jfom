@@ -1,0 +1,11 @@
+<svg viewBox="0 0 32 32">
+  <path fill="#fff" d="M0 0h32v32H0z"/>
+  <path fill="none" stroke="#e75012" stroke-width="2" d="M8 7h16" data-name="Linie 366"/>
+  <path fill="none" stroke="#e75012" stroke-width="2" d="M8 20h12" data-name="Linie 367"/>
+  <path fill="none" stroke="#e75012" stroke-width="2" d="M8 25h14" data-name="Linie 368"/>
+  <g fill="none" stroke="#e75012" data-name="Rechteck 2547">
+    <path stroke="none" d="M6 11h20v5H6z"/>
+    <path d="M6.5 11.5h19v4h-19z"/>
+  </g>
+  <path fill="#e75012" d="M19 11h7v5h-7z" data-name="Rechteck 2548"/>
+</svg>

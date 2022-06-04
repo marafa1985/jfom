@@ -1,0 +1,45 @@
+@import '../../../styles/functions.scss';
+@import '../../../styles/vars.scss';
+
+.Accordion__summary {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  user-select: none;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+  .Summary__Header {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: pixelToRem(48);
+    font-size: pixelToRem(14);
+    font-weight: bold;
+    color: $black01;
+    .Badge {
+      margin-left: pixelToRem(5);
+    }
+  }
+  .Accordion__Arrow {
+    display: flex;
+    align-items: center;
+    margin-top: pixelToRem(1);
+    transition: transform 0.2s;
+    transform: scaleY(-1);
+    img {
+      width: pixelToRem(24);
+      height: pixelToRem(24);
+    }
+  }
+
+  .down {
+    transform: scaleY(-1);
+  }
+
+  .up {
+    transform: scaleY(1);
+  }
+}

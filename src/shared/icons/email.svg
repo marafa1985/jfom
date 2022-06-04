@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
+    <g id="badge_mail" transform="translate(-641 -923)">
+      <circle id="Ellipse_795" data-name="Ellipse 795" cx="40" cy="40" r="40" transform="translate(641 923)" fill="#1f4d7c"/>
+      <g id="icon_mail_32px" transform="translate(665 947)">
+        <rect id="Rechteck_2038" data-name="Rechteck 2038" width="32" height="32" fill="#fff" opacity="0"/>
+        <g id="Gruppe_5729" data-name="Gruppe 5729">
+          <rect id="Rechteck_2671" data-name="Rechteck 2671" width="26" height="18" rx="1" transform="translate(3 7)" fill="none" stroke="#fff" stroke-width="2"/>
+          <path id="Pfad_2336" data-name="Pfad 2336" d="M0,0,11,11a3.491,3.491,0,0,0,2,1,3.491,3.491,0,0,0,2-1L26,0" transform="translate(3 7)" fill="none" stroke="#fff" stroke-width="2"/>
+          <path id="Pfad_2337" data-name="Pfad 2337" d="M5,1l9,9" transform="translate(15 15)" fill="none" stroke="#fff" stroke-width="2"/>
+          <path id="Pfad_2338" data-name="Pfad 2338" d="M13,10l9-9" transform="translate(-10 15)" fill="none" stroke="#fff" stroke-width="2"/>
+        </g>
+      </g>
+    </g>
+  </svg>

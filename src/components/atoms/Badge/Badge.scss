@@ -1,0 +1,18 @@
+@import '../../../styles/functions.scss';
+@import '../../../styles/vars.scss';
+.Badge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: pixelToRem(20);
+  height: pixelToRem(20);
+  background-color: $orange01;
+  border-radius: 50%;
+  font-size: pixelToRem(10);
+  color: $white01;
+  font-weight: bold;
+}
+
+.Badge--disabled {
+  background-color: $orange04;
+}

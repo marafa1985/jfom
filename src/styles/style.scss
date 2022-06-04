@@ -1,0 +1,42 @@
+#employeeEdit {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  align-items: center;
+
+  input {
+    margin: 5px;
+    padding: 5px;
+  }
+
+  .buttonControls {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+  }
+}
+
+details {
+  input[type='search'] {
+    height: 2.5rem;
+    padding: 0 1.33rem;
+    font-size: 1.17rem;
+    border-width: 0.08rem;
+    border-radius: 0.17rem;
+    border-style: solid;
+    background-color: #ffffff;
+    border-color: #c8ced2;
+    color: #222222;
+    appearance: initial;
+    max-width: 22.67rem;
+    width: calc(100% - 1.33rem);
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.25rem;
+  }
+}

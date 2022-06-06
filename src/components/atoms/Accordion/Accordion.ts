@@ -1,5 +1,4 @@
-import { FC } from 'lib/component';
-import { SuffixedTagNameObject } from '../../../../lib/types';
+import { SuffixedTagName } from '../../../../lib/types';
 import { UpIcon } from '../../../shared/icons';
 import { Badge } from '../Badge/Badge';
 import { StoreList, stores } from '../StoreList/StoreList';
@@ -7,10 +6,7 @@ import './Accordion.scss';
 
 let openState = true;
 
-type AccordionSummaryProps = {
-  innerHTML: string;
-};
-const AccordionSummary: FC<AccordionSummaryProps> = ({ innerHTML }) => {
+const AccordionSummary = (innerHTML?: string): SuffixedTagName => {
   const handleSummary = () => {
     const arrowSpanElement = document.querySelector('.Accordion__Arrow');
     if (arrowSpanElement) {
@@ -41,7 +37,7 @@ const AccordionSummary: FC<AccordionSummaryProps> = ({ innerHTML }) => {
   };
 };
 
-const AccordionContent = (): SuffixedTagNameObject => ({
+const AccordionContent = (): SuffixedTagName => ({
   storeInputSearch: {
     placeholder: 'Store suchen'
   },
@@ -50,7 +46,7 @@ const AccordionContent = (): SuffixedTagNameObject => ({
   }
 });
 
-export const Accordion = (): SuffixedTagNameObject => {
+export const Accordion = (): SuffixedTagName => {
   const handleOnToggle = () => {
     openState = !openState;
   };
@@ -59,9 +55,7 @@ export const Accordion = (): SuffixedTagNameObject => {
     accordionDetails: {
       ontoggle: handleOnToggle,
       open: openState,
-      ...AccordionSummary({
-        innerHTML: 'Abholung im Store'
-      }),
+      ...AccordionSummary('Abholung im Store'),
       ...AccordionContent()
     }
   };

@@ -1,5 +1,5 @@
 import { Accordion } from './components/atoms/Accordion/Accordion';
-import { JElement, render } from '../lib/types';
+import { SuffixedTagName, render } from '../lib/types';
 import './styles/style.scss';
 
 const handleClick = (ev: MouseEvent) => {
@@ -8,7 +8,7 @@ const handleClick = (ev: MouseEvent) => {
   alert('hello');
 };
 
-const page: JElement = {
+const page: SuffixedTagName = {
   employeeEditDiv: {
     ...Accordion(),
     formTitleH1: {

@@ -1,38 +1,35 @@
 /* eslint-disable no-undef */
+
 import { InputsElements, constInputsElements, JElementList } from './const';
 
 type InputTypes = typeof constInputsElements[number];
 
 export type ElementsTagName = {
   [Props in InputTypes as Props]: HTMLInputElement;
-} & HTMLElementTagNameMap &
-  SVGElementTagNameMap;
+} & HTMLElementTagNameMap;
 
 export type PartialElementsTagName<T extends keyof ElementsTagName> = Partial<
   ElementsTagName[T]
 >;
 
-export type PrefixedTagName = {
-  [Prop in keyof ElementsTagName as `${string}_${Prop}`]: PartialElementsTagName<Prop> & {
-    ElementList?: PrefixedTagName;
-  };
-};
-
 export type DataAttributeName = {
   [index: `data-${string}`]: string;
 };
 
+export type PrefixedTagName = {
+  [Prop in keyof ElementsTagName as `${string}_${Prop}`]: (
+    | PartialElementsTagName<Prop>
+    | PrefixedTagName
+  ) &
+    DataAttributeName;
+};
+
 export type SuffixedTagName = {
-  [Prop in keyof ElementsTagName as `${string}${Capitalize<Prop>}`]: PartialElementsTagName<Prop>;
-};
-
-export type SuffixedTagNameObject = SuffixedTagName & {
-  [index: keyof SuffixedTagName]: SuffixedTagName;
-};
-
-export type JElement = {
-  [index: keyof SuffixedTagName]: // | SuffixedTagName
-  SuffixedTagNameObject | DataAttributeName;
+  [Prop in keyof ElementsTagName as `${string}${Capitalize<Prop>}`]: (
+    | PartialElementsTagName<Prop>
+    | SuffixedTagName
+  ) &
+    DataAttributeName;
 };
 
 type ElementProps = {

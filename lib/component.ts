@@ -1,20 +1,40 @@
-import { SuffixedTagNameObject } from './types';
-
-export type FC<P = {}> = {
-  (props: P): SuffixedTagNameObject | null;
-};
+import { SuffixedTagName } from './types';
 
 type BadgeProps = {
   value: any;
   isDisabled?: boolean;
 };
 
-export const Component: FC<BadgeProps> = ({ value, isDisabled }) => {
+export const Text = (text: string): SuffixedTagName => {
+  return {
+    badgeButton: {
+      'data-testid': 'text',
+      innerHTML: text,
+      placeholder: text
+    }
+  };
+};
+
+type FC<P = {}> = (props: P) => SuffixedTagName;
+
+export const Component: FC<BadgeProps> = ({
+  value,
+  isDisabled
+}): SuffixedTagName => {
+  console.log(value);
+
   return {
     badgeDiv: {
-      className: 'Badge' + (isDisabled ? ' Badge--disabled' : ''),
       'data-testid': 'badge',
-      innerHTML: value
+      className: 'Badge' + (isDisabled ? ' Badge--disabled' : ''),
+      innerHTML: value,
+      ...Text('Hello'),
+      arrowSpan: {
+        className: '',
+        accountNumber: {
+          placeholder: ''
+        }
+      }
     }
   };
 };

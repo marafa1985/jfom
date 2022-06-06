@@ -2,7 +2,7 @@ import { Accordion } from './components/atoms/Accordion/Accordion';
 import { JElement, render } from '../lib/types';
 import './styles/style.scss';
 
-const func = (ev: MouseEvent) => {
+const handleClick = (ev: MouseEvent) => {
   console.log(ev);
   ev.preventDefault();
   alert('hello');
@@ -10,14 +10,14 @@ const func = (ev: MouseEvent) => {
 
 const page: JElement = {
   employeeEditDiv: {
-    filterDiv: { ...Accordion },
+    ...Accordion(),
     formTitleH1: {
       innerHTML: 'Employee Information',
-      onclick: func
+      onclick: handleClick
     },
     formTitleH2: {
       innerHTML: 'Employee Information',
-      onclick: func
+      onclick: handleClick
     },
     employeeForm: {
       personalInfoDiv: {
@@ -41,13 +41,14 @@ const page: JElement = {
       buttonDiv: {
         className: 'buttonControls',
         cancelReset: {
-          onclick: function (ev: MouseEvent) {
-            console.log(ev);
-            ev.preventDefault();
-            alert('hello');
-          }
+          onclick: handleClick
         },
-        submitSubmit: {}
+        submitSubmit: {
+          onclick: function (ev: MouseEvent) {
+            ev.preventDefault();
+            confirm('hello');
+          }
+        }
       }
     }
   }

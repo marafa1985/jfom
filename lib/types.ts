@@ -3,12 +3,12 @@ import { InputsElements, constInputsElements, JElementList } from './const';
 
 type InputTypes = typeof constInputsElements[number];
 
-type ElementsTagName = {
+export type ElementsTagName = {
   [Props in InputTypes as Props]: HTMLInputElement;
 } & HTMLElementTagNameMap &
   SVGElementTagNameMap;
 
-type PartialElementsTagName<T extends keyof ElementsTagName> = Partial<
+export type PartialElementsTagName<T extends keyof ElementsTagName> = Partial<
   ElementsTagName[T]
 >;
 
@@ -38,10 +38,10 @@ export type JElement = {
 type ElementProps = {
   tagName: keyof ElementsTagName;
   elementId: string;
-  children?: SuffixedTagNameObject;
+  children?: SuffixedTagName;
 };
 
-const getElementProps = (element: SuffixedTagNameObject): ElementProps[] => {
+const getElementProps = (element: SuffixedTagName): ElementProps[] => {
   return Object.keys(element).map(key => {
     const elementNameArray = key.split(/(?=[A-Z])/);
     let tagName =
@@ -50,13 +50,13 @@ const getElementProps = (element: SuffixedTagNameObject): ElementProps[] => {
       tagName = key;
     }
     const elementId = key.substring(0, key.length - tagName.length);
-    const children = element[key as keyof SuffixedTagNameObject];
+    const children = element[key as keyof SuffixedTagName];
 
     return { tagName, elementId, children } as ElementProps;
   });
 };
 
-const getElementData = (children: SuffixedTagNameObject) => {
+const getElementData = (children: SuffixedTagName) => {
   const subElements: ElementProps[] = [];
   const elementProps: ElementProps[] = [];
   const ElementChildrenAndProperties = getElementProps(children);
@@ -117,7 +117,7 @@ const renderElement = ({ tagName, elementId, children }: ElementProps) => {
 };
 
 export const render = (
-  element: SuffixedTagNameObject,
+  element: SuffixedTagName,
   container: HTMLElement | null
 ) => {
   const containerElement = container ?? document.body;

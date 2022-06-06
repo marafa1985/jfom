@@ -1,12 +1,15 @@
-import { FC } from 'lib/component';
-import './Badge.scss';
+import { SuffixedTagNameObject } from './types';
+
+export type FC<P = {}> = {
+  (props: P): SuffixedTagNameObject | null;
+};
 
 type BadgeProps = {
   value: any;
   isDisabled?: boolean;
 };
 
-export const Badge: FC<BadgeProps> = ({ value, isDisabled }) => {
+export const Component: FC<BadgeProps> = ({ value, isDisabled }) => {
   return {
     badgeDiv: {
       className: 'Badge' + (isDisabled ? ' Badge--disabled' : ''),

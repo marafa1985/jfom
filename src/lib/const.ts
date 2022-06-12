@@ -1,5 +1,4 @@
 export const InputsElements = [
-  'button',
   'checkbox',
   'color',
   'date',

@@ -1,5 +1,5 @@
 import { Accordion } from './components/atoms/Accordion/Accordion';
-import { SuffixedTagName, render } from '../lib/types';
+import { SuffixedTagName, render } from './lib/types';
 import './styles/style.scss';
 
 const handleClick = (ev: MouseEvent) => {
@@ -43,15 +43,19 @@ const page: SuffixedTagName = {
         cancelReset: {
           onclick: handleClick
         },
-        submitSubmit: {
-          onclick: function (ev: MouseEvent) {
-            ev.preventDefault();
-            confirm('hello');
-          }
+        Button: {
+          innerHTML: 'Click me',
+          onclick: () => confirm('hello')
         }
       }
     }
   }
 };
+
+// eslint-disable-next-line no-unused-vars
+const refReplacer = (_: any, value: any) =>
+  typeof value === 'function' ? value.toString() : value;
+
+// const jsonPage = JSON.stringify(page, refReplacer);
 
 render(page, document.getElementById('root'));

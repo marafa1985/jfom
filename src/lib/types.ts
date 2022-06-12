@@ -32,13 +32,13 @@ export type SuffixedTagName = {
     DataAttributeName;
 };
 
-type ElementProps = {
+export type ElementProps = {
   tagName: keyof ElementsTagName;
   elementId: string;
   children?: SuffixedTagName;
 };
 
-const getElementProps = (element: SuffixedTagName): ElementProps[] => {
+export const getElementProps = (element: SuffixedTagName): ElementProps[] => {
   return Object.keys(element).map(key => {
     const elementNameArray = key.split(/(?=[A-Z])/);
     let tagName =
@@ -53,7 +53,7 @@ const getElementProps = (element: SuffixedTagName): ElementProps[] => {
   });
 };
 
-const getElementData = (children: SuffixedTagName) => {
+export const getElementData = (children: SuffixedTagName) => {
   const subElements: ElementProps[] = [];
   const elementProps: ElementProps[] = [];
   const ElementChildrenAndProperties = getElementProps(children);
@@ -69,7 +69,11 @@ const getElementData = (children: SuffixedTagName) => {
   return { subElements, elementProps };
 };
 
-const renderElement = ({ tagName, elementId, children }: ElementProps) => {
+export const renderElement = ({
+  tagName,
+  elementId,
+  children
+}: ElementProps) => {
   let newElementTagName = tagName.toString();
   const newElementType = tagName;
 
@@ -78,7 +82,10 @@ const renderElement = ({ tagName, elementId, children }: ElementProps) => {
   }
 
   const newElement: HTMLElement = document.createElement(newElementTagName);
-  newElement.id = elementId;
+
+  if (elementId) {
+    newElement.id = elementId;
+  }
 
   if (newElementTagName === 'input') {
     (newElement as HTMLInputElement).type = newElementType;
@@ -111,6 +118,36 @@ const renderElement = ({ tagName, elementId, children }: ElementProps) => {
   }
 
   return newElement;
+};
+
+export const updatedElement = ({ elementId, children }: ElementProps) => {
+  const currentElement = document.querySelector('#' + elementId);
+
+  if (currentElement && children) {
+    const { subElements, elementProps } = getElementData(children);
+
+    if (elementProps.length > 0) {
+      elementProps.forEach(elements => {
+        const key = elements.tagName;
+        const value = elements.children as any;
+
+        if (key.startsWith('on')) {
+          const eventName = key.substring(2, key.length);
+          currentElement.addEventListener(eventName, value);
+          return;
+        }
+        if (key in currentElement) {
+          (currentElement as any)[key] = value;
+        } else {
+          currentElement.setAttribute(key, value);
+        }
+      });
+    }
+
+    subElements.forEach(child => {
+      updatedElement(child);
+    });
+  }
 };
 
 export const render = (

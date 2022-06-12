@@ -1,5 +1,3 @@
-import { FC } from 'lib/component';
-
 export type Store = {
   key: string;
   title: string;
@@ -16,7 +14,7 @@ export const stores: Store[] = [
   }
 ];
 
-export const StoreList: FC<Store[]> = storeList => {
+export const StoreList = (storeList: Store[]) => {
   const controlList: any = {};
   storeList.forEach(
     store =>

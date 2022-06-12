@@ -15,13 +15,11 @@ export const Text = (text: string): SuffixedTagName => {
   };
 };
 
-type FC<P = {}> = (props: P) => SuffixedTagName;
-
-export const Component: FC<BadgeProps> = ({
+export const Component = ({
   value,
   isDisabled
-}): SuffixedTagName => {
-  console.log(value);
+}: BadgeProps): SuffixedTagName => {
+  // console.log(value);
 
   return {
     badgeDiv: {
